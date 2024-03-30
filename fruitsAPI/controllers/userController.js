@@ -46,6 +46,26 @@ function createToken(user){
 }
 
 // verify a token
+function checkToken(req, res, next){
+    let token = req.get('Authorization')
+    if(token){
+        token = token.split(' ')[1]
+        jwt.verify(token, process.env.SECRET, (err, decoded) => {
+            req.user = err ? null : decoded.user
+            req.exp = err ? null : new Date(decoded.exp * 1000)
+        })
+        return next()
+    } else {
+        req.user = null 
+        return next()
+    }
+}
+
+function ensureLoggedIn(req, res, next ){
+    if(req.user) return next()
+    res.status('401').json({ msg: 'Unauthorized You Shall Not Pass'})
+}
+
 
 // show a user
 
