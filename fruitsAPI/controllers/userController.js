@@ -31,8 +31,12 @@ router.post('/login', async (req, res) => {
         const { email, password } = req.body
         const user = await db.User.findOne({ email })
         if(!user) throw new Error(`Could not find this user in the database: User with email ${email}`)  
+        const isPasswordMatched = await bcrypt.compare(password, user.password)
+        if (!isPasswordMatched) throw new Error(`The password credentials shared did not match the credentials for the user with email ${email}`)
+        const token = createToken(user)
+        res.json({ token, user })
     } catch (error) {
-        
+        res.status(400).json({ msg: error.message })
     }
 })
 // createToken
