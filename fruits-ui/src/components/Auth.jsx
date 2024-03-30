@@ -50,7 +50,10 @@ export default function Auth(props){
                 showLogin?
                 <section>
                     <h2 onClick={() => setShowLogin(!showLogin)}>Login <small>click to switch to signup</small></h2>
-                    <form>
+                    <form onSubmit={(e) => {
+                        e.preventDefault()
+                        handleLogin()
+                    }}>
                         <input type="text" name="username" placeholder="Add Username" value={formData.username} onChange={handleChange} />
                         <input type="password" name="password" placeholder="Add Password" value={formData.password} onChange={handleChange} />
                         <input type="submit" value="Log Me In" />
@@ -58,7 +61,10 @@ export default function Auth(props){
                 </section>:
                  <section>
                  <h2 onClick={() => setShowLogin(!showLogin)}>SignUp <small>click to switch to login</small></h2>
-                 <form>
+                 <form onSubmit={(e) => {
+                        e.preventDefault()
+                        handleSignUp()
+                }}>
                      <input type="text" name="username" placeholder="Add Username" value={formData.username} onChange={handleChange}/>
                      <input type="password" name="password" placeholder="Add Password" value={formData.password} onChange={handleChange} />
                      <input type="submit" value="Sign Me Up"/>
