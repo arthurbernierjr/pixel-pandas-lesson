@@ -3,7 +3,7 @@ import {useState} from 'react'
 
 export default function Auth(props){
     const [showLogin, setShowLogin] = useState(true)
-    const [formData, setFormdata] = useState({
+    const [formData, setFormData] = useState({
         username: '',
         password: ''
     })
@@ -40,6 +40,10 @@ export default function Auth(props){
             console.error(error)
         }
     }
+
+    const handleChange = (e) => {
+        setFormData({...formData, [e.target.name]: e.target.value})
+    }
     return(
         <div>
             {
@@ -47,16 +51,16 @@ export default function Auth(props){
                 <section>
                     <h2 onClick={() => setShowLogin(!showLogin)}>Login <small>click to switch to signup</small></h2>
                     <form>
-                        <input type="text" name="username" placeholder="Add Username" />
-                        <input type="password" name="password" placeholder="Add Password" />
+                        <input type="text" name="username" placeholder="Add Username" value={formData.username} onChange={handleChange} />
+                        <input type="password" name="password" placeholder="Add Password" value={formData.password} onChange={handleChange} />
                         <input type="submit" value="Log Me In" />
                     </form>
                 </section>:
                  <section>
                  <h2 onClick={() => setShowLogin(!showLogin)}>SignUp <small>click to switch to login</small></h2>
                  <form>
-                     <input type="text" name="username" placeholder="Add Username" />
-                     <input type="password" name="password" placeholder="Add Password" />
+                     <input type="text" name="username" placeholder="Add Username" value={formData.username} onChange={handleChange}/>
+                     <input type="password" name="password" placeholder="Add Password" value={formData.password} onChange={handleChange} />
                      <input type="submit" value="Sign Me Up"/>
                  </form>
              </section>
