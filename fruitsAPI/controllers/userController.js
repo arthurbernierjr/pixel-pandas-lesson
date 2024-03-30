@@ -12,7 +12,7 @@ router.post('/', async (req, res) => {
         await newUser.save()
         // make a token
         const token = createToken(newUser)
-        res.json({token, user})
+        res.json({token, newUser})
     } catch (error) {
         res.status(400).json({ msg: error.message })
     }
