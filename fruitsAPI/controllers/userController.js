@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
 
 //signup ---> Create Route
+// tested and functions
 
 router.post('/', async (req, res) => {
     try {
@@ -25,7 +26,7 @@ router.post('/', async (req, res) => {
 // receive credential from the user
 // verify that the credential are accurate
 // if the credentials are accurate then you return a token
-
+// tested and functional
 router.post('/login', async (req, res) => {
     try {
         const { username, password } = req.body
