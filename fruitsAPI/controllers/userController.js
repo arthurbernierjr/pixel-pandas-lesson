@@ -44,6 +44,8 @@ function createToken(user){
    return jwt.sign({ user }, process.env.SECRET, { expiresIn: '24h' })
 }
 
+// verify a token
+
 // show a user
 
 // show all users
@@ -52,7 +54,7 @@ function createToken(user){
 
 // update a user
 
-// verify a token
+
 
 
 
